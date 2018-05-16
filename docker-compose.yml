@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+        myjenkins:
+                image: jenkins
+                ports:
+                        - 8080:8080
+                volumes:
+                        - jenkins:/var/jenkins_home
+        tomcat-staging:
+                image: tomcat
+                ports:
+                        - 8081:8081
+                volumes:
+                        - ./conf/server-staging.xml:/usr/local/tomcat/conf/server.xml
+                        - ./conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+                        - ./conf/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+        tomcat-prod:
+                image: tomcat
+                ports:
+                        - 8090:8090
+                volumes:
+                        - ./conf/server-prod.xml:/usr/local/tomcat/conf/server.xml
+                        - ./conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+                        - ./conf/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+
+volumes:
+        jenkins:
+                external: true
