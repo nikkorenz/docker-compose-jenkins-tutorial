@@ -23,6 +23,13 @@ services:
                         - ./conf/server-prod.xml:/usr/local/tomcat/conf/server.xml
                         - ./conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
                         - ./conf/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+        jenkins_slave_1:
+                build: .
+                ports:
+                        - 22:22
+                depends_on:
+                        - myjenkins
+
 
 volumes:
         jenkins:
